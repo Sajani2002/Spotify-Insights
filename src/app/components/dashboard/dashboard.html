@@ -2,19 +2,18 @@
 
   <!-- Header / Profile -->
   <div class="profile-card">
-    <img class="profile-pic" src="https://via.placeholder.com/80" alt="User Profile">
+    <img class="profile-pic" [src]="profile.image || 'https://via.placeholder.com/80'" alt="User Profile">
     <div class="profile-info">
-      <h2 class="profile-name">Hello, Spotify User! 👋</h2>
-      <p class="profile-email">user@example.com</p>
-<button class="login-btn" (click)="login()">Login with Spotify</button>
-
+      <h2 class="profile-name">Hello, {{ profile.name || 'Spotify User' }}! 👋</h2>
+      <p class="profile-email">{{ profile.email || 'user@example.com' }}</p>
+      <button class="login-btn" (click)="login()">Login with Spotify</button>
     </div>
   </div>
 
   <!-- Charts Section -->
-  <div class="charts-section">
+  <div class="grid grid-cols-2 gap-6 p-6">
+    <app-profile-card></app-profile-card>
     <app-top-tracks-chart></app-top-tracks-chart>
-    <!-- Future charts can go here -->
   </div>
 
 </div>

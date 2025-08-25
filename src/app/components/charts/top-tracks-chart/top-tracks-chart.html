@@ -1,8 +1,6 @@
-<div class="chart-card">
-  <h2>Top Tracks Popularity</h2>
+<div class="p-4 bg-white shadow-lg rounded-xl">
   <canvas baseChart
-          [data]="barChartData"
-          [type]="barChartType"
-          [options]="barChartOptions">
+    [data]="chartData"
+    [type]="'bar'">
   </canvas>
 </div>

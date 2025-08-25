@@ -1,21 +1,86 @@
 // controllers/spotifyController.js
-import axios from 'axios';
-import { getTopTracks } from '../services/spotifyService.js';
+import axios from "axios";
+import dotenv from "dotenv";
 
-let cachedAccessToken = '';
+dotenv.config();
 
+let cachedAccessToken = "";
+
+// 1️⃣ Login: redirect user to Spotify authorization page
 export const login = (req, res) => {
-  // ... login logic
+  const scope = "user-top-read user-read-email user-read-private";
+  const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
+  const client_id = process.env.SPOTIFY_CLIENT_ID;
+
+  res.redirect(
+    `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}`
+  );
 };
 
+// 2️⃣ Callback: exchange code for access token
 export const callback = async (req, res) => {
-  // ... callback logic
+  const code = req.query.code || null;
+  if (!code) return res.status(400).json({ error: "No code provided" });
+
+  try {
+    const response = await axios.post(
+      "https://accounts.spotify.com/api/token",
+      new URLSearchParams({
+        grant_type: "authorization_code",
+        code: code,
+        redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+        client_id: process.env.SPOTIFY_CLIENT_ID,
+        client_secret: process.env.SPOTIFY_CLIENT_SECRET,
+      }).toString(),
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
+    );
+
+    cachedAccessToken = response.data.access_token; // save for API requests
+
+    // send token info back or redirect frontend
+    res.redirect(`http://127.0.0.1:4200/callback?access_token=${response.data.access_token}`);
+  } catch (err) {
+    console.error("Error exchanging code for token:", err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to authenticate" });
+  }
 };
 
-export const topTracks = async (req, res) => {
-  // ... top tracks logic
-};
-
+// 3️⃣ Profile: fetch Spotify profile
 export const profile = async (req, res) => {
-  // ... profile logic
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(400).json({ error: { status: 400, message: "Only valid bearer authentication supported" } });
+  }
+  const accessToken = authHeader.split(" ")[1];
+
+  try {
+    const response = await axios.get("https://api.spotify.com/v1/me", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    res.json(response.data);
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to fetch profile" });
+  }
+};
+
+// 4️⃣ Top Tracks: fetch user's top tracks
+export const topTracks = async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(400).json({ error: { status: 400, message: "Only valid bearer authentication supported" } });
+  }
+  const accessToken = authHeader.split(" ")[1];
+
+  try {
+    const response = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    res.json(response.data.items);
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to fetch top tracks" });
+  }
 };
