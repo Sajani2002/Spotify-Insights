@@ -42,8 +42,8 @@ export const callback = async (req, res) => {
     // send token info back or redirect frontend
     res.redirect(`http://127.0.0.1:4200/callback?access_token=${response.data.access_token}`);
   } catch (err) {
-    console.error("Error exchanging code for token:", err.response?.data || err.message);
-    res.status(500).json({ error: "Failed to authenticate" });
+    console.error("Spotify error:", err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to authenticate", details: err.response?.data || err.message });
   }
 };
 

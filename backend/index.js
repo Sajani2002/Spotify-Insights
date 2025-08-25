@@ -8,7 +8,10 @@ import authRoutes from './routes/auth.js';
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
+app.use(cors({
+  origin: 'http://127.0.0.1:4200',
+  credentials: true
+}));
 app.use(express.json());
 
 // session middleware (temporary store for codeVerifier)

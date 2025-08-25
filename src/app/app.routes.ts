@@ -4,6 +4,6 @@ import { CallbackComponent } from './auth/callback/callback.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'callback', component: CallbackComponent }
 ];

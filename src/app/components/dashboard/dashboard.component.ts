@@ -17,9 +17,13 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-  const token = localStorage.getItem('spotifyToken'); // read token
+  const token = localStorage.getItem('spotifyToken');
+  if (!token) {
+    // Optionally, redirect to login or show a message
+    return;
+  }
 
-  this.http.get<any>('/api/auth/profile', {
+  this.http.get<any>('http://127.0.0.1:3000/api/auth/profile', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe(data => {
     this.profile = {
@@ -29,7 +33,7 @@ export class DashboardComponent implements OnInit {
     };
   });
 
-  this.http.get<any>('/api/auth/top-tracks', {
+  this.http.get<any>('http://127.0.0.1:3000/api/auth/top-tracks', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe(tracks => {
     console.log(tracks); // pass to chart component
@@ -38,11 +42,11 @@ export class DashboardComponent implements OnInit {
 
 
   login() {
-    const clientId = 'b797b53f95f64cc2b565390ea086f441';
-    const redirectUri = encodeURIComponent('http://127.0.0.1:4200/callback');
-    const scope = 'user-top-read user-read-email user-read-private';
+  const clientId = 'b797b53f95f64cc2b565390ea086f441';
+  const redirectUri = encodeURIComponent('http://127.0.0.1:3000/api/auth/callback');
+  const scope = 'user-top-read user-read-email user-read-private';
 
-    window.location.href =
-      `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
-  }
+  window.location.href =
+    `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
+}
 }
