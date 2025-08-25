@@ -1,0 +1,13 @@
+.chart-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #282828; /* dark card */
+  color: #1db954; /* Spotify green accents */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
