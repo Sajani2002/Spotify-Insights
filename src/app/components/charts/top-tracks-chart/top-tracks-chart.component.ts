@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ChartConfiguration, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-top-tracks-chart',
@@ -9,20 +10,18 @@ import { ChartConfiguration, ChartType } from 'chart.js';
   templateUrl: './top-tracks-chart.html',
   styleUrls: ['./top-tracks-chart.scss']
 })
-export class TopTracksChartComponent {
-
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-  };
-
-  public barChartLabels: string[] = ['Track 1', 'Track 2', 'Track 3', 'Track 4', 'Track 5'];
-
+export class TopTracksChartComponent implements OnInit {
+  public barChartOptions: ChartConfiguration['options'] = { responsive: true };
+  public barChartLabels: string[] = [];
   public barChartType: ChartType = 'bar';
+  public barChartData: ChartConfiguration['data'] = { labels: [], datasets: [{ data: [], label: 'Popularity' }] };
 
-  public barChartData: ChartConfiguration['data'] = {
-    labels: this.barChartLabels,
-    datasets: [
-      { data: [65, 59, 80, 81, 56], label: 'Popularity' }
-    ]
-  };
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get<any[]>('/api/auth/top-tracks').subscribe(tracks => {
+      this.barChartLabels = tracks.map(t => t.name);
+      this.barChartData.datasets[0].data = tracks.map(t => t.popularity);
+    });
+  }
 }
