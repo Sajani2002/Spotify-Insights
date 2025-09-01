@@ -1,13 +1,41 @@
-.chart-card {
-  padding: 1.5rem;
-  border-radius: 12px;
-  background-color: #282828; /* dark card */
-  color: #1db954; /* Spotify green accents */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+/* Local variables for the Top Tracks component */
+$spotify-gray: #181818;
+$spotify-light-gray: #282828;
+$text-muted: #B3B3B3;
+$border-radius-md: 12px;
+
+:host {
+  display: block;
+  height: 100%;
 }
 
-.charts-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+.top-tracks-card {
+  background-color: $spotify-gray;
+  border-radius: $border-radius-md;
+  padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $spotify-light-gray;
+  }
+}
+
+.card-title {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 24px 0;
+  flex-shrink: 0; // Prevent title from shrinking
+}
+
+.chart-wrapper {
+  // This wrapper will grow to fill the available space in the card
+  flex-grow: 1;
+  position: relative; // Important for Chart.js responsiveness
 }

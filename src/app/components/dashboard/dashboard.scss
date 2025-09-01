@@ -1,29 +1,58 @@
-.profile-card {
+// Variables for consistent theming (optional, but good practice)
+$spotify-green: #1DB954;
+$dark-grey: #121212;
+$light-grey: #282828;
+$text-color: #FFFFFF;
+$secondary-text-color: #B3B3B3;
+
+.dashboard-wrapper {
+  background-color: $dark-grey;
+  min-height: 100vh; // Ensure it takes full height
+  color: $text-color;
+  font-family: 'Montserrat', sans-serif; // Or whatever font you prefer
+
+  display: grid;
+  grid-template-rows: auto 1fr; // Header takes what it needs, content takes rest
+}
+
+.dashboard-header {
+  padding: 1.5rem 2rem;
+  background-color: $light-grey; // Slightly lighter than main background
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
-  background-color: #1db954;
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  justify-content: space-between; // Pushes profile card to one side, might add nav items later
+}
 
-  .profile-pic {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 1rem;
+.dashboard-content {
+  padding: 2rem;
+
+  .charts-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Responsive grid for charts
+    gap: 1.5rem; // Space between charts
+  }
+}
+
+// Styling for the login button if it's still in the header or profile card
+.login-btn {
+  background-color: $spotify-green;
+  color: $text-color;
+  border: none;
+  border-radius: 500px; // Pill shape
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: darken($spotify-green, 10%);
+    transform: translateY(-1px);
   }
 
-  .profile-info {
-    .profile-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin: 0;
-    }
-    .profile-email {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-top: 0.2rem;
-    }
+  &:active {
+    transform: translateY(0);
   }
 }

@@ -1,0 +1,77 @@
+/* 
+  Since we're not using a global style sheet for variables, 
+  we define them here for this component's use.
+*/
+$spotify-green: #1DB954;
+$spotify-gray: #181818;
+$text-white: #FFFFFF;
+$text-muted: #B3B3B3;
+$border-radius-md: 12px;
+
+:host {
+  display: block; // Ensures the component takes up grid space properly
+  height: 100%;   // Makes the component fill the height of its parent grid cell
+}
+
+.profile-card {
+  background-color: $spotify-gray;
+  border-radius: $border-radius-md;
+  padding: 24px;
+  height: 100%;
+  box-sizing: border-box; // Important for padding and height to work together
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Pushes title up and underline down
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #282828; // Lighter gray on hover, like Spotify's UI
+  }
+}
+
+.card-title {
+  font-size: 0.875rem; // 14px
+  font-weight: 400;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 24px 0; // Reset top margin, add bottom margin
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1; // Allows this section to fill available vertical space
+}
+
+.profile-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid $spotify-green;
+  margin-bottom: 16px;
+}
+
+.profile-name {
+  font-size: 1.25rem; // 20px
+  font-weight: 700;
+  color: $text-white;
+  margin: 0;
+}
+
+.profile-email {
+  font-size: 0.875rem; // 14px
+  color: $text-muted;
+  margin-top: 4px;
+}
+
+.card-underline {
+  width: 40px;
+  height: 4px;
+  background-color: $spotify-green;
+  border-radius: 2px;
+  margin: 24px auto 0; // Top margin, centered horizontally, no bottom margin
+}

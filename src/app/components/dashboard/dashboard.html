@@ -1,19 +1,16 @@
-<div class="dashboard-container">
+<div class="dashboard-wrapper">
+  <header class="dashboard-header">
+    <app-profile-card [profile]="profile"></app-profile-card>
+  </header>
 
-  <!-- Header / Profile -->
-  <div class="profile-card">
-    <img class="profile-pic" [src]="profile.image || 'https://via.placeholder.com/80'" alt="User Profile">
-    <div class="profile-info">
-      <h2 class="profile-name">Hello, {{ profile.name || 'Spotify User' }}! 👋</h2>
-      <p class="profile-email">{{ profile.email || 'user@example.com' }}</p>
-      <button class="login-btn" (click)="login()">Login with Spotify</button>
-    </div>
-  </div>
+  <main class="dashboard-content">
+    <section class="charts-section">
+      <app-top-tracks-chart [tracks]="topTracks"></app-top-tracks-chart>
+      <!-- You can add more chart components here later -->
+    </section>
 
-  <!-- Charts Section -->
-  <div class="grid grid-cols-2 gap-6 p-6">
-    <app-profile-card></app-profile-card>
-    <app-top-tracks-chart></app-top-tracks-chart>
-  </div>
+    <!-- Potentially other sections, like recent activity, etc. -->
+  </main>
 
+  <button (click)="login()" *ngIf="!profile?.name">Login with Spotify</button>
 </div>

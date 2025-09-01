@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpotifyService } from '../../services/spotify';
 
 @Component({
   selector: 'app-profile-card',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './profile-card.html',
-  styleUrls: ['./profile-card.scss']
+  styleUrls: ['./profile-card.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
-export class ProfileCardComponent implements OnInit {
-  profile: any;
+export class ProfileCardComponent implements OnChanges {
+  @Input() profile: any;
 
-  constructor(private spotify: SpotifyService) {}
-
-  ngOnInit(): void {
-    this.spotify.getProfile().subscribe(data => {
-      this.profile = data;
-    });
+  ngOnChanges() {
+    console.log(this.profile);
   }
 }

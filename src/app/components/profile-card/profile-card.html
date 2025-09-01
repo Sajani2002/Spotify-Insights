@@ -1,5 +1,9 @@
-<div *ngIf="profile" class="p-4 shadow-lg rounded-xl bg-white w-72">
-  <img [src]="profile.images?.[0]?.url" alt="profile" class="w-20 h-20 rounded-full mx-auto" />
-  <h2 class="text-xl font-bold text-center mt-2">{{ profile.display_name }}</h2>
-  <p class="text-center text-gray-500">{{ profile.email }}</p>
+<!-- src/app/profile-card/profile-card.component.html -->
+
+<div *ngIf="profile" class="profile-card">
+  <img [src]="profile.image || 'https://via.placeholder.com/80'" alt="User Profile" class="profile-image" />
+  <div class="profile-info">
+    <h2 class="profile-name">{{ profile.name }}</h2>
+    <p class="profile-email">{{ profile.email }}</p>
+  </div>
 </div>

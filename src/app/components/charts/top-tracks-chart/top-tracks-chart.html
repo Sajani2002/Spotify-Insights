@@ -1,6 +1,12 @@
-<div class="p-4 bg-white shadow-lg rounded-xl">
-  <canvas baseChart
-    [data]="chartData"
-    [type]="'bar'">
-  </canvas>
+<!-- src/app/components/charts/top-tracks-chart/top-tracks-chart.html -->
+
+<div class="top-tracks-card">
+  <h3 class="card-title">Top Tracks</h3>
+  <div class="chart-wrapper">
+    <canvas baseChart
+      [data]="chartData"
+      [options]="chartOptions"
+      [type]="'bar'">
+    </canvas>
+  </div>
 </div>

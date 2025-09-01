@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { TopTracksChartComponent } from '../charts/top-tracks-chart/top-tracks-chart.component';
 import { ProfileCardComponent } from '../profile-card/profile-card.component';
 
@@ -8,20 +9,18 @@ import { ProfileCardComponent } from '../profile-card/profile-card.component';
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss'],
   standalone: true,
-  imports: [TopTracksChartComponent, ProfileCardComponent]
+  imports: [CommonModule, TopTracksChartComponent, ProfileCardComponent]
 })
 export class DashboardComponent implements OnInit {
   profile: any = {};
   accessToken: string = '';
+  topTracks: any[] = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
   const token = localStorage.getItem('spotifyToken');
-  if (!token) {
-    // Optionally, redirect to login or show a message
-    return;
-  }
+  if (!token) return;
 
   this.http.get<any>('http://127.0.0.1:3000/api/auth/profile', {
     headers: { Authorization: `Bearer ${token}` }
@@ -36,7 +35,7 @@ export class DashboardComponent implements OnInit {
   this.http.get<any>('http://127.0.0.1:3000/api/auth/top-tracks', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe(tracks => {
-    console.log(tracks); // pass to chart component
+    this.topTracks = tracks;
   });
 }
 
