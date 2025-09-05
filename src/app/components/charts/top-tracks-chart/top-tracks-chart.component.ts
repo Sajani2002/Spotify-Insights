@@ -13,6 +13,7 @@ import { SpotifyService } from '../../../services/spotify';
   templateUrl: './top-tracks-chart.html',
   styleUrls: ['./top-tracks-chart.scss'] // Make sure to add this line
 })
+
 export class TopTracksChartComponent implements OnChanges {
   @Input() tracks: any[] = [];
 

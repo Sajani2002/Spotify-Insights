@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopTracksChart } from './top-tracks-chart';
+import { TopTracksChartComponent } from './top-tracks-chart.component';
 
-describe('TopTracksChart', () => {
-  let component: TopTracksChart;
-  let fixture: ComponentFixture<TopTracksChart>;
+describe('TopTracksChartComponent', () => {
+  let component: TopTracksChartComponent;
+  let fixture: ComponentFixture<TopTracksChartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TopTracksChart]
+      imports: [TopTracksChartComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TopTracksChart);
+    fixture = TestBed.createComponent(TopTracksChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

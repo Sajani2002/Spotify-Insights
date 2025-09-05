@@ -4,20 +4,18 @@
     <p>Explore your Spotify listening habits.</p>
     <button class="spotify-login-btn" (click)="login()" *ngIf="!profile?.name">Login with Spotify</button>
   </div>
-  <img src="assets/spotify-logo.png"  alt="Spotify Logo" class="spotify-logo"/>
+  <img src="assets/spotify-logo.png" alt="Spotify Logo" class="spotify-logo"/>
 </div>
 
-
-  <main class="profile-content">
+<main class="dashboard-cards">
+  <section class="card profile-card-section">
     <app-profile-card [profile]="profile"></app-profile-card>
-  </main>
-
-  <main class="dashboard-content">
-    <section class="charts-section">
-      <app-top-tracks-chart [tracks]="topTracks"></app-top-tracks-chart>
-      <!-- You can add more chart components here later -->
-    </section>
-
-    <!-- Potentially other sections, like recent activity, etc. -->
-  </main>
+  </section>
+  <section class="card top-tracks-card-section">
+    <app-top-tracks-chart [tracks]="topTracks"></app-top-tracks-chart>
+  </section>
+  <section class="card top-artists-card-section">
+    <app-top-artists-chart [artists]="topArtists"></app-top-artists-chart>
+  </section>
+</main>
 

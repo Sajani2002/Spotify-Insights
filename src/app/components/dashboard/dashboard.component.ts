@@ -3,18 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { TopTracksChartComponent } from '../charts/top-tracks-chart/top-tracks-chart.component';
 import { ProfileCardComponent } from '../profile-card/profile-card.component';
+import { TopArtistsChartComponent } from '../charts/top-artists-chart/top-artists-chart.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss'],
   standalone: true,
-  imports: [CommonModule, TopTracksChartComponent, ProfileCardComponent]
+  imports: [CommonModule, TopTracksChartComponent, ProfileCardComponent, TopArtistsChartComponent]
 })
 export class DashboardComponent implements OnInit {
   profile: any = {};
   accessToken: string = '';
   topTracks: any[] = [];
+  topArtists: any[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -35,7 +37,14 @@ export class DashboardComponent implements OnInit {
   this.http.get<any>('http://127.0.0.1:3000/api/auth/top-tracks', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe(tracks => {
-    this.topTracks = tracks;
+    console.log('Top tracks:', tracks);
+    this.topTracks = tracks.slice(0, 5); // Limit to 5 tracks
+  });
+
+  this.http.get<any>('http://127.0.0.1:3000/api/auth/top-artists', {
+    headers: { Authorization: `Bearer ${token}` }
+  }).subscribe(artists => {
+    this.topArtists = artists;
   });
 }
 
