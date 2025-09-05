@@ -7,10 +7,10 @@
   <img src="assets/spotify-logo.png"  alt="Spotify Logo" class="spotify-logo"/>
 </div>
 
-<div class="dashboard-wrapper">
-  <header class="dashboard-header">
+
+  <main class="dashboard-content">
     <app-profile-card [profile]="profile"></app-profile-card>
-  </header>
+  </main>
 
   <main class="dashboard-content">
     <section class="charts-section">
@@ -22,4 +22,3 @@
   </main>
 
   <button (click)="login()" *ngIf="!profile?.name">Login with Spotify</button>
-</div>
