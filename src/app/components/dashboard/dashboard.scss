@@ -35,6 +35,10 @@ $secondary-text-color: #B3B3B3;
   }
 }
 
+.profile-content {
+  padding: 2rem;
+}
+
 // Styling for the login button if it's still in the header or profile card
 .login-btn {
   background-color: $spotify-green;

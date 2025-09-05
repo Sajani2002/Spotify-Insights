@@ -8,7 +8,7 @@
 </div>
 
 
-  <main class="dashboard-content">
+  <main class="profile-content">
     <app-profile-card [profile]="profile"></app-profile-card>
   </main>
 
@@ -21,4 +21,3 @@
     <!-- Potentially other sections, like recent activity, etc. -->
   </main>
 
-  <button (click)="login()" *ngIf="!profile?.name">Login with Spotify</button>
