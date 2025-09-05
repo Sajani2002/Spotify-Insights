@@ -56,3 +56,62 @@ $secondary-text-color: #B3B3B3;
     transform: translateY(0);
   }
 }
+
+.welcome-card {
+  display: flex;
+  align-items: center;
+  background: $light-grey; // Use the same background as profile card
+  border-radius: 20px;
+  padding: 64px 40px 45px 100px; // Increased top padding
+  margin-bottom: 32px;
+  margin-top: 32px;
+  margin-left: 32px;
+  margin-right: 32px;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.welcome-content {
+  flex: 1;
+}
+
+.welcome-card h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+}
+
+.welcome-card p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 24px;
+}
+
+.wave {
+  font-size: 2rem;
+}
+
+.spotify-login-btn {
+  background: #181818;
+  color: #1db954;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: background 0.2s;
+}
+
+.spotify-login-btn:hover {
+  background: #282828;
+}
+
+.spotify-logo {
+  width: 80px;
+  height: auto;
+  margin-right: 16px;
+}

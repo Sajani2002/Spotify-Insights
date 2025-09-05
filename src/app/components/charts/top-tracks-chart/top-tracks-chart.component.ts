@@ -32,34 +32,43 @@ export class TopTracksChartComponent implements OnChanges {
   // --- CHART OPTIONS CONFIGURATION (FOR STYLING) ---
   public chartOptions: ChartOptions<'bar'> = {
     responsive: true,
-    maintainAspectRatio: false, // Allows chart to fill container height
+    maintainAspectRatio: false,
     plugins: {
-      legend: {
-        display: false // Hide the legend (e.g., "Popularity")
-      },
+      legend: { display: false },
       tooltip: {
-        backgroundColor: '#282828', // Dark tooltip background
+        backgroundColor: '#282828',
         titleColor: '#FFFFFF',
         bodyColor: '#B3B3B3'
       }
     },
     scales: {
-      x: { // X-axis (track names)
-        grid: {
-          display: false // Hide vertical grid lines
-        },
+      x: {
+        grid: { display: false },
         ticks: {
-          color: '#B3B3B3', // Muted color for track names
-          font: {
-            size: 10
-          }
+          color: '#B3B3B3',
+          font: { size: 10 }
+        },
+        title: {
+          display: true,
+          text: 'Track Name',
+          color: '#B3B3B3',
+          font: { size: 12 }
         }
       },
-      y: { // Y-axis (popularity)
-        display: false, // Hide the entire Y-axis (numbers and line)
-        grid: {
-          display: false // Hide horizontal grid lines
-        }
+      y: {
+        display: true, // Show Y-axis now
+        grid: { display: false },
+        title: {
+          display: true,
+          text: 'Popularity',
+          color: '#B3B3B3',
+          font: { size: 12 }
+        },
+        ticks: {
+          color: '#B3B3B3',
+          font: { size: 10 }
+        },
+        beginAtZero: true
       }
     }
   };
