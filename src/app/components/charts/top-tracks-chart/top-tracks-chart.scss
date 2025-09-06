@@ -9,29 +9,19 @@ $border-radius-md: 12px;
   height: 100%;
 }
 
-.top-tracks-card {
-  background-color: $spotify-gray;
-  border-radius: $border-radius-md;
-  padding: 24px;
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: $spotify-light-gray;
-  }
-}
+// .top-tracks-card {
+//   width: 100%;
+//   text-align: center;
+//   background-color: $spotify-gray;
+//   border-radius: $border-radius-md;
+// }
 
 .card-title {
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: $text-muted;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 24px 0;
-  flex-shrink: 0; // Prevent title from shrinking
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #fff;
+  text-align: center;
 }
 
 .chart-wrapper {

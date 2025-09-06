@@ -4,6 +4,7 @@
 */
 $spotify-green: #1DB954;
 $spotify-gray: #181818;
+$light-grey: #282828;
 $text-white: #FFFFFF;
 $text-muted: #B3B3B3;
 $border-radius-md: 12px;
@@ -14,7 +15,7 @@ $border-radius-md: 12px;
 }
 
 .profile-card {
-  background-color: $spotify-gray;
+  background-color: $light-grey;
   border-radius: $border-radius-md;
   padding: 24px;
   height: 100%;

@@ -1,13 +1,21 @@
-.top-artists-card {
-  width: 100%;
-  text-align: center;
-}
+$spotify-gray: #181818;
+$spotify-light-gray: #282828;
+$text-muted: #B3B3B3;
+$border-radius-md: 12px;
+
+// .top-artists-card {
+//   width: 100%;
+//   text-align: center;
+//   background-color: $spotify-gray;
+//   border-radius: $border-radius-md;
+// }
 
 .card-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 16px;
   color: #fff;
+  text-align: center;
 }
 
 .artists-list {
