@@ -14,29 +14,31 @@ $border-radius-md: 12px;
   height: 100%;   // Makes the component fill the height of its parent grid cell
 }
 
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: #fff;
+  text-align: center;
+}
+
 .profile-card {
   background-color: $light-grey;
   border-radius: $border-radius-md;
   padding: 24px;
-  height: 100%;
+  // height: 100%; // Remove or comment out this line
+  min-height: 200px; // Optional: set a min-height for consistency
   box-sizing: border-box; // Important for padding and height to work together
   display: flex;
   flex-direction: column;
-  justify-content: space-between; // Pushes title up and underline down
+  justify-content: flex-start;  // Pushes title up and underline down
   transition: background-color 0.3s ease;
+  align-items: center; // Center children horizontally
+  position: relative;  // Ensure children are positioned relative to this container
 
   &:hover {
     background-color: #282828; // Lighter gray on hover, like Spotify's UI
   }
-}
-
-.card-title {
-  font-size: 0.875rem; // 14px
-  font-weight: 400;
-  color: $text-muted;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 24px 0; // Reset top margin, add bottom margin
 }
 
 .card-content {
@@ -53,7 +55,7 @@ $border-radius-md: 12px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid $spotify-green;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .profile-name {
@@ -75,4 +77,13 @@ $border-radius-md: 12px;
   background-color: $spotify-green;
   border-radius: 2px;
   margin: 24px auto 0; // Top margin, centered horizontally, no bottom margin
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0; // Remove any large margins
+  padding: 0;
+  width: 100%; // Optional: ensures it doesn't overflow
 }
