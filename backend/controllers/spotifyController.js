@@ -75,12 +75,33 @@ export const topTracks = async (req, res) => {
   const accessToken = authHeader.split(" ")[1];
 
   try {
-    const response = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term", // last 4 weeks
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
     res.json(response.data.items);
   } catch (err) {
     console.error(err.response?.data || err.message);
     res.status(500).json({ error: "Failed to fetch top tracks" });
+  }
+};
+
+// 5️⃣ Top Artists: fetch user's top artists
+export const topArtists = async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(400).json({ error: { status: 400, message: "Only valid bearer authentication supported" } });
+  }
+  const accessToken = authHeader.split(" ")[1];
+
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/top/artists?time_range=short_term", // last 4 weeks
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    res.json(response.data.items);
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to fetch top artists" });
   }
 };

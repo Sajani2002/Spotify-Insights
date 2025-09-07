@@ -37,13 +37,14 @@ export class DashboardComponent implements OnInit {
   this.http.get<any>('http://127.0.0.1:3000/api/auth/top-tracks', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe(tracks => {
-    console.log('Top tracks:', tracks);
+    console.log('Top tracks:', tracks); // Add this line
     this.topTracks = tracks.slice(0, 5); // Limit to 5 tracks
   });
 
   this.http.get<any>('http://127.0.0.1:3000/api/auth/top-artists', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe(artists => {
+    console.log('Top artists:', artists); // Add this line
     this.topArtists = artists;
   });
 }

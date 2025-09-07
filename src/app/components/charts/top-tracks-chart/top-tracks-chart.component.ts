@@ -1,6 +1,6 @@
 // src/app/components/charts/top-tracks-chart/top-tracks-chart.component.ts
 
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
@@ -16,6 +16,7 @@ import { SpotifyService } from '../../../services/spotify';
 
 export class TopTracksChartComponent implements OnChanges {
   @Input() tracks: any[] = [];
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   // --- CHART DATA CONFIGURATION ---
   public chartData: ChartConfiguration<'bar'>['data'] = {
@@ -77,11 +78,14 @@ export class TopTracksChartComponent implements OnChanges {
   constructor(private spotify: SpotifyService) {}
 
   ngOnChanges(): void {
-    // Limit to top 10 for a cleaner chart
     const topTenTracks = this.tracks.slice(0, 10);
-    
     this.chartData.labels = topTenTracks.map((track: any) => this.truncateLabel(track.name, 10));
     this.chartData.datasets[0].data = topTenTracks.map((track: any) => track.popularity);
+
+    // Force chart update
+    if (this.chart) {
+      this.chart.update();
+    }
   }
 
   // Helper function to prevent long track names from cluttering the chart
