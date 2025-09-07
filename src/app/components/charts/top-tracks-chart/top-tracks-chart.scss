@@ -28,4 +28,8 @@ $border-radius-md: 12px;
   // This wrapper will grow to fill the available space in the card
   flex-grow: 1;
   position: relative; // Important for Chart.js responsiveness
+  height: 250px; // Increase this value for more vertical space
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
