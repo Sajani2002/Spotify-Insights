@@ -4,19 +4,31 @@ import { CommonModule } from '@angular/common';
 import { TopTracksChartComponent } from '../charts/top-tracks-chart/top-tracks-chart.component';
 import { ProfileCardComponent } from '../profile-card/profile-card.component';
 import { TopArtistsChartComponent } from '../charts/top-artists-chart/top-artists-chart.component';
+import { TopGenresCardComponent } from '../charts/top-genres-card/top-genres-card.component';
+import { MoodInsightCardComponent } from '../mood-insights-card/mood-insights-card.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss'],
   standalone: true,
-  imports: [CommonModule, TopTracksChartComponent, ProfileCardComponent, TopArtistsChartComponent]
+  imports: [
+    CommonModule,
+    TopTracksChartComponent,
+    ProfileCardComponent,
+    TopArtistsChartComponent,
+    TopGenresCardComponent,
+    MoodInsightCardComponent
+  ]
 })
 export class DashboardComponent implements OnInit {
   profile: any = {};
   accessToken: string = '';
   topTracks: any[] = [];
   topArtists: any[] = [];
+  topGenres: string[] = [];
+  moodSummary: string = '';
+  moodEmoji: string = '';
 
   constructor(private http: HttpClient) {}
 
