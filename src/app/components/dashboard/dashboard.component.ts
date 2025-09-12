@@ -59,6 +59,13 @@ export class DashboardComponent implements OnInit {
     console.log('Top artists:', artists); // Add this line
     this.topArtists = artists;
   });
+
+  this.http.get<any>('http://127.0.0.1:3000/api/auth/top-genres', {
+    headers: { Authorization: `Bearer ${token}` }
+  }).subscribe(genres => {
+    console.log('Top genres:', genres); // Debug log
+    this.topGenres = genres;
+  });
 }
 
 
