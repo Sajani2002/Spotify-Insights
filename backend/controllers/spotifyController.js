@@ -147,10 +147,17 @@ export const moodInsights = async (req, res) => {
     const tracksResponse = await axios.get("https://api.spotify.com/v1/me/top/tracks?limit=10", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    const trackIds = tracksResponse.data.items.map(track => track.id).join(',');
+    const trackIdsArr = tracksResponse.data.items.map(track => track.id);
+    console.log('tracksResponse:', tracksResponse.data);
+    console.log('trackIdsArr:', trackIdsArr);
+    if (trackIdsArr.length === 0) {
+      return res.json({ moodSummary: "Not enough data", moodEmoji: "😐" });
+    }
+    const trackIds = trackIdsArr.join(',');
     const featuresResponse = await axios.get(`https://api.spotify.com/v1/audio-features?ids=${trackIds}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
+    console.log('featuresResponse:', featuresResponse.data);
     const features = featuresResponse.data.audio_features;
     const avgValence = features.reduce((sum, f) => sum + f.valence, 0) / features.length;
     let moodSummary = "Mostly neutral";
@@ -164,7 +171,7 @@ export const moodInsights = async (req, res) => {
     }
     res.json({ moodSummary, moodEmoji });
   } catch (err) {
-    console.error(err.response?.data || err.message);
+    console.error('Spotify moodInsights error:', err.response?.data || err.message);
     res.status(500).json({ error: "Failed to fetch mood insights" });
   }
 };

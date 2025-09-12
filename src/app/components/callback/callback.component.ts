@@ -12,10 +12,9 @@ export class CallbackComponent implements OnInit {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('access_token');
     if (token) {
-      localStorage.setItem('spotifyToken', token);
+      localStorage.setItem('spotifyToken', token); // <-- Store token here
       this.router.navigate(['/dashboard']);
     } else {
-      // handle error
       this.router.navigate(['/']);
     }
   }

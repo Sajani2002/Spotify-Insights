@@ -66,6 +66,14 @@ export class DashboardComponent implements OnInit {
     console.log('Top genres:', genres); // Debug log
     this.topGenres = genres;
   });
+
+  this.http.get<any>('http://127.0.0.1:3000/api/auth/mood-insights', {
+    headers: { Authorization: `Bearer ${token}` }
+  }).subscribe(mood => {
+    console.log('Mood insight:', mood); // Debug log
+    this.moodSummary = mood.moodSummary;
+    this.moodEmoji = mood.moodEmoji;
+  });
 }
 
 
@@ -76,5 +84,10 @@ export class DashboardComponent implements OnInit {
 
   window.location.href =
     `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
+}
+
+logout() {
+  localStorage.removeItem('spotifyToken');
+  window.location.reload();
 }
 }

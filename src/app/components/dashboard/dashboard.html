@@ -3,6 +3,7 @@
     <h1>Welcome back, {{ profile?.name || 'Guest' }}! <span class="wave">👋</span></h1>
     <p>Explore your Spotify listening habits.</p>
     <button class="spotify-login-btn" (click)="login()" *ngIf="!profile?.name">Login with Spotify</button>
+    <button class="spotify-logout-btn" (click)="logout()" *ngIf="profile?.name">Logout</button>
   </div>
   <img src="assets/spotify-logo.png" alt="Spotify Logo" class="spotify-logo"/>
 </div>
